@@ -17,8 +17,8 @@
 ///每一帧的模拟时间
 constexpr float deltaT = 0.1f;
 constexpr int width = 800,height = 600;
-constexpr float influence = 100.0f;
-constexpr float minDist = 100.0f;
+constexpr float influence = 600.0f;
+constexpr float minDist = 600.0f;
 constexpr float maxForce = 10.0f;
 constexpr float maxSpeed = 10.0f;
 constexpr float mf = 0.001f;
@@ -61,7 +61,7 @@ struct Boid{
 		}
 
 		std::uniform_real_distribution<float> velo (-2.0f,2.0f);
-		sf::Vector2f acc = sep * 40.f + align * 0.01f + cohen * 0.05f + sf::Vector2f(velo(mt_engine),velo(mt_engine)) ;
+		sf::Vector2f acc = sep * 40.f + align * 0.01f + cohen * 0.05f;// + sf::Vector2f(velo(mt_engine),velo(mt_engine)) ;
 		float len_2 = acc.x * acc.x + acc.y * acc.y;
 		if(len_2 > maxForce * maxForce)acc *= maxForce / std::sqrt(len_2);
 		velocity += acc * deltaT;
