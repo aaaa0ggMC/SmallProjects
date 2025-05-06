@@ -26,22 +26,22 @@ public:
 };
 
 string ANSIToUTF8(string in){
-    //¶¨ÒåÊäÈëÖµ²¢»ñÈ¡Æä³¤¶È
+    //å®šä¹‰è¾“å…¥å€¼å¹¶è·å–å…¶é•¿åº¦
     string buildRet = "";
     char * input_string=(char *)in.c_str();
     int in_size= strlen(input_string);
 
 
-    /*Ó³ÉäÒ»¸ö×Ö·û´®µ½Ò»¸ö¿í×Ö·û£¨unicode£©µÄ×Ö·û´®¡£ÓÉ¸Ãº¯ÊıÓ³ÉäµÄ×Ö·û´®Ã»±ØÒªÊÇ¶à×Ö½Ú×Ö·û×é¡£
-       CP_ACP£ºANSI´úÂëÒ³£¨¼òÌåÖĞÎÄWindows²Ù×÷ÏµÍ³ÖĞ£¬ANSI ±àÂë´ú±í GBK ±àÂë£©*/
-    //ÏÈ»ñÈ¡¿í×Ö·û´®³¤¶È²¢´´½¨£¬ÔÙÒÔÊµ¼ÊÖµÖ´ĞĞº¯Êı
+    /*æ˜ å°„ä¸€ä¸ªå­—ç¬¦ä¸²åˆ°ä¸€ä¸ªå®½å­—ç¬¦ï¼ˆunicodeï¼‰çš„å­—ç¬¦ä¸²ã€‚ç”±è¯¥å‡½æ•°æ˜ å°„çš„å­—ç¬¦ä¸²æ²¡å¿…è¦æ˜¯å¤šå­—èŠ‚å­—ç¬¦ç»„ã€‚
+       CP_ACPï¼šANSIä»£ç é¡µï¼ˆç®€ä½“ä¸­æ–‡Windowsæ“ä½œç³»ç»Ÿä¸­ï¼ŒANSI ç¼–ç ä»£è¡¨ GBK ç¼–ç ï¼‰*/
+    //å…ˆè·å–å®½å­—ç¬¦ä¸²é•¿åº¦å¹¶åˆ›å»ºï¼Œå†ä»¥å®é™…å€¼æ‰§è¡Œå‡½æ•°
     int wide_size=MultiByteToWideChar(CP_ACP, 0, input_string, in_size, NULL, 0);
     wchar_t * wide_string = (wchar_t * ) malloc(wide_size*sizeof(wchar_t));
     MultiByteToWideChar(CP_ACP, 0, input_string, in_size, wide_string, wide_size);
 
 
-    /*°Ñ¿í×Ö·û´®×ª»»³ÉÖ¸¶¨µÄĞÂµÄ×Ö·û´®£¬ÈçANSI£¬UTF8µÈ£¬ĞÂ×Ö·û´®²»±ØÊÇ¶à×Ö½Ú×Ö·û¼¯¡£
-       CP_UTF8£ºÊ¹ÓÃUTF-8×ª»»*/
+    /*æŠŠå®½å­—ç¬¦ä¸²è½¬æ¢æˆæŒ‡å®šçš„æ–°çš„å­—ç¬¦ä¸²ï¼Œå¦‚ANSIï¼ŒUTF8ç­‰ï¼Œæ–°å­—ç¬¦ä¸²ä¸å¿…æ˜¯å¤šå­—èŠ‚å­—ç¬¦é›†ã€‚
+       CP_UTF8ï¼šä½¿ç”¨UTF-8è½¬æ¢*/
     int utf8_size = WideCharToMultiByte(CP_UTF8, 0, wide_string, wide_size, NULL, 0, NULL, NULL);
     char *utf8_string = (char * ) malloc(utf8_size);
     WideCharToMultiByte(CP_UTF8, 0, wide_string, wide_size, utf8_string, utf8_size, NULL, NULL);
@@ -60,7 +60,7 @@ MultiEnString::MultiEnString(string str,EncType e){
 
 MultiEnString::MultiEnString(wstring str,EncType e){
     if(e == Unicode){
-        ///TODO£º»¹ÒªÍêÉÆ Required to do it well
+        ///TODOï¼šè¿˜è¦å®Œå–„ Required to do it well
         utf8InnerData = std::wstring_convert< std::codecvt_utf8<wchar_t>, wchar_t >{}.to_bytes(str);
     }else if(e == Utf16){
         utf8InnerData = std::wstring_convert< std::codecvt_utf8<wchar_t>, wchar_t >{}.to_bytes(str);
@@ -87,8 +87,8 @@ wstring MultiEnString::GetUnicode(){
 }
 
 HWND GetBackground() {
-    //±³¾°´°ÌåÃ»ÓĞ´°ÌåÃû£¬µ«ÊÇÖªµÀËüµÄÀàÃûÊÇworkerW£¬ÇÒÓĞ¸¸´°ÌåProgram Maneger£¬ËùÒÔÖ»Òª
-    //±éÀúËùÓĞworkWÀàĞÍµÄ´°Ìå£¬ÖğÒ»±È½ÏËüµÄ¸¸´°ÌåÊÇ²»ÊÇProgram Manager¾Í¿ÉÒÔÕÒµ½±³¾°´°Ìå
+    //èƒŒæ™¯çª—ä½“æ²¡æœ‰çª—ä½“åï¼Œä½†æ˜¯çŸ¥é“å®ƒçš„ç±»åæ˜¯workerWï¼Œä¸”æœ‰çˆ¶çª—ä½“Program Manegerï¼Œæ‰€ä»¥åªè¦
+    //éå†æ‰€æœ‰workWç±»å‹çš„çª—ä½“ï¼Œé€ä¸€æ¯”è¾ƒå®ƒçš„çˆ¶çª—ä½“æ˜¯ä¸æ˜¯Program Managerå°±å¯ä»¥æ‰¾åˆ°èƒŒæ™¯çª—ä½“
     HWND hwnd = FindWindowA("progman", "Program Manager");
     HWND worker = NULL;
     do {
@@ -101,13 +101,13 @@ HWND GetBackground() {
             }
         }
         if (GetParent(worker) == hwnd) {
-            return worker;//·µ»Ø½á¹û
+            return worker;//è¿”å›ç»“æœ
         }
     } while (worker != NULL);
-    //Ã»ÓĞÕÒµ½
-    //·¢ËÍÏûÏ¢Éú³ÉÒ»¸öWorkerW´°Ìå
+    //æ²¡æœ‰æ‰¾åˆ°
+    //å‘é€æ¶ˆæ¯ç”Ÿæˆä¸€ä¸ªWorkerWçª—ä½“
     SendMessage(hwnd,0x052C,0,0);
-    //ÖØ¸´ÉÏÃæ²½Öè
+    //é‡å¤ä¸Šé¢æ­¥éª¤
     do {
         worker = FindWindowExA(NULL, worker, "workerW", NULL);
         if (worker != NULL) {
@@ -118,7 +118,7 @@ HWND GetBackground() {
             }
         }
         if (GetParent(worker) == hwnd) {
-            return worker;//·µ»Ø½á¹û
+            return worker;//è¿”å›ç»“æœ
         }
     } while (worker != NULL);
     return NULL;
