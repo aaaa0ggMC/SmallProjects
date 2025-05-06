@@ -1,7 +1,7 @@
 # SmallPrograms
- 业余写点小玩意儿
+ 业余写点小玩意，一般不依赖我自己的其他库，一般库都可以通过msys2/archlinux直接安装
 
-> Github2FA学长太阴险了，这个项目暂时放到Gitlab Hongkong
+> ~Github2FA学长太阴险了，这个项目暂时放到GitlabHongkong~....没想到Hongkong版本竟然要钱，还是之后拥抱github吧，还是gitlab    国内学弟更胜一筹
 
 > 构建可通过build.sh
 
