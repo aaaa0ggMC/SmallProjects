@@ -18,7 +18,7 @@ FILETYPE VFT_APP
 			 VALUE "FileVersion", "0.0.1"
 			 VALUE "FileDescription", "FNAF"
 			 VALUE "InternalName", ""
-			 VALUE "LegalCopyright", "Copyright(c)aaaa0ggMC(Со*Бъ) 2020 GNU/SFML"
+			 VALUE "LegalCopyright", "Copyright(c)aaaa0ggMC 2020 GNU/SFML"
 			 VALUE "LegalTrademarks", "https://space.bilibili.com/394099679"
 			 VALUE "OriginalFilename", "fnaf.exe"
 			 VALUE "ProductName", "Five Nights At Freddy's Home"

@@ -1,23 +1,23 @@
 /*
-×÷Õß£ºaaaa0ggMC                 ½öÔÚbilibili
-¸üĞÂÊ±¼ä:2020/8/9
-ÎÄ¼ş×÷ÓÃ£ºÌá¹©Ä£ĞÍ
+ä½œè€…ï¼šaaaa0ggMC                 ä»…åœ¨bilibili
+æ›´æ–°æ—¶é—´:2020/8/9
+æ–‡ä»¶ä½œç”¨ï¼šæä¾›æ¨¡å‹
 */
-#ifndef WINMUSICPLAYER_H_INCLUDED                               //·ÀÖ¹ÖØ×°ÔØ
-#define WINMUSICPLAYER_H_INCLUDED                               //·ÀÖ¹ÖØ×°ÔØ
-#include <windows.h>                                            //C¿â£¬ÓÃÓÚ´°¿Ú±à³Ì
-#include <mmsystem.h>                                           //C¿â£¬Ö§³ÖPlaySoundA(LPCSTR,HMODULE,DWORD)
-#include <string>                                               //C++¿â£¬Ö§³Östring
-#include <vector>                                               //C++¿â£¬Ö§³Övector
-#include <stdio.h>                                              //C¿â£¬Ö§³Ö¸÷ÖÖIO
-#include <iostream>                                             //C++¿â£¬Ö§³ÖIO
+#ifndef WINMUSICPLAYER_H_INCLUDED                               //é˜²æ­¢é‡è£…è½½
+#define WINMUSICPLAYER_H_INCLUDED                               //é˜²æ­¢é‡è£…è½½
+#include <windows.h>                                            //Cåº“ï¼Œç”¨äºçª—å£ç¼–ç¨‹
+#include <mmsystem.h>                                           //Cåº“ï¼Œæ”¯æŒPlaySoundA(LPCSTR,HMODULE,DWORD)
+#include <string>                                               //C++åº“ï¼Œæ”¯æŒstring
+#include <vector>                                               //C++åº“ï¼Œæ”¯æŒvector
+#include <stdio.h>                                              //Cåº“ï¼Œæ”¯æŒå„ç§IO
+#include <iostream>                                             //C++åº“ï¼Œæ”¯æŒIO
 #include <stdlib.h>
 #include <tchar.h>
 #include <fcntl.h>
 #include <process.h>
 #include <thread>
 
-using namespace std;                                            //C++±ê×¼¿âµÄÃüÃû¿Õ¼ä
+using namespace std;                                            //C++æ ‡å‡†åº“çš„å‘½åç©ºé—´
 
 /**
 
@@ -89,22 +89,22 @@ public:
 	CPlayer(LPCSTR src,bool useThread = false);
 	~CPlayer();
 	CPlayer();
-	BOOL Open(LPCSTR lpFileName);//´ò¿ªÎÄ¼ş
-	BOOL Play();//²¥·Å
-	BOOL Close();//¹Ø±Õ
-	BOOL Stop();//Í£Ö¹
-	BOOL Pause();//ÔİÍ£
+	BOOL Open(LPCSTR lpFileName);//æ‰“å¼€æ–‡ä»¶
+	BOOL Play();//æ’­æ”¾
+	BOOL Close();//å…³é—­
+	BOOL Stop();//åœæ­¢
+	BOOL Pause();//æš‚åœ
 	BOOL SetVolume(DWORD dSize);
 	BOOL SetPos(DWORD dwPos);
 	BOOL SetAudioOnOff(bool AudioOff);
 	BOOL SetSpeed(DWORD Speed);
-	DWORD GetLength(DWORD dwItem);//»ñÈ¡¸èÇú³¤¶È
+	DWORD GetLength(DWORD dwItem);//è·å–æ­Œæ›²é•¿åº¦
 	BOOL GetError(LPTSTR pszText, UINT cchText);
-	void SetWindowHwnd(HWND hWnd);//ÉèÖÃÖ÷´°¿Ú¾ä±ú
+	void SetWindowHwnd(HWND hWnd);//è®¾ç½®ä¸»çª—å£å¥æŸ„
 private:
-	MCI_OPEN_PARMS m_ciOpen;//´ò¿ªÉè±¸²ÎÊı
-	HWND m_hWnd;//Ö÷´°¿Ú¾ä±ú
-	DWORD m_dwFrom;//²¥·ÅÆğÊ¼µã
+	MCI_OPEN_PARMS m_ciOpen;//æ‰“å¼€è®¾å¤‡å‚æ•°
+	HWND m_hWnd;//ä¸»çª—å£å¥æŸ„
+	DWORD m_dwFrom;//æ’­æ”¾èµ·å§‹ç‚¹
 	MCIERROR m_dwError;
 	bool m_loop;
 	bool m_useThread;

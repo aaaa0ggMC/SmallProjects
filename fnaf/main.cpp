@@ -1,25 +1,25 @@
 /*
-×÷Õß£ºaaaa0ggMC                 ½öÔÚbilibili
-¸üĞÂÊ±¼ä:2020/8/9
-ÎÄ¼ş×÷ÓÃ£ºÔËĞĞÓÎÏ·
+ä½œè€…ï¼šaaaa0ggMC                 ä»…åœ¨bilibili
+æ›´æ–°æ—¶é—´:2020/8/9
+æ–‡ä»¶ä½œç”¨ï¼šè¿è¡Œæ¸¸æˆ
 */
-#define WINVER 0x1008611        //¿ÉÒÔÊ¹ÓÃ¸ü¶àµÄwindows.hÖĞµÄº¯Êı£¬ÔÚwinMusicPlayer.hÖĞ°üº¬ÁËwindows.h
-#include <SFML/Graphics.hpp>    //Ö§³ÖSprite,RenderedWindow,Texture...µÄÍâ²¿¿â
-#include <string>               //Ö§³ÖstringµÄC++¿â
-#include <stdio.h>              //Ö§³Öprintf,fread,fwrite...µÈIOµÄC¿â
-#include <vector>               //Ö§³ÖvectorµÄC++¿â
-#include <iostream>             //Ö§³ÖcoutµÄC++¿â
-#include <stdlib.h>             //Ö§³Ösystem(const char *)µÄC¿â
-#include <time.h>               //C¿â£¬ÓÃÀ´Ö¸Ê¾Ê±¼ä
-#include "winMusicPlayer.h"     //¿ÉÒÔ²¥·ÅWAVµÄmmsystemÒôÀÖ²¥·ÅÆ÷
+#define WINVER 0x1008611        //å¯ä»¥ä½¿ç”¨æ›´å¤šçš„windows.hä¸­çš„å‡½æ•°ï¼Œåœ¨winMusicPlayer.hä¸­åŒ…å«äº†windows.h
+#include <SFML/Graphics.hpp>    //æ”¯æŒSprite,RenderedWindow,Texture...çš„å¤–éƒ¨åº“
+#include <string>               //æ”¯æŒstringçš„C++åº“
+#include <stdio.h>              //æ”¯æŒprintf,fread,fwrite...ç­‰IOçš„Cåº“
+#include <vector>               //æ”¯æŒvectorçš„C++åº“
+#include <iostream>             //æ”¯æŒcoutçš„C++åº“
+#include <stdlib.h>             //æ”¯æŒsystem(const char *)çš„Cåº“
+#include <time.h>               //Cåº“ï¼Œç”¨æ¥æŒ‡ç¤ºæ—¶é—´
+#include "winMusicPlayer.h"     //å¯ä»¥æ’­æ”¾WAVçš„mmsysteméŸ³ä¹æ’­æ”¾å™¨
 #include <fstream>
 #include "main.h"
 #include <stdint.h>
 #include <ctype.h>
 #include <pthread.h>
 
-using namespace std;            //C++±ê×¼¿âµÄÃüÃû¿Õ¼ä
-using namespace sf;             //SFMLµÄÃüÃû¿Õ¼ä
+using namespace std;            //C++æ ‡å‡†åº“çš„å‘½åç©ºé—´
+using namespace sf;             //SFMLçš„å‘½åç©ºé—´
 
 struct HelpWindow{
     HelpWindow(Window * to);
@@ -34,32 +34,32 @@ string uppercase(string tar);
 
 void * thread_run(void *);
 
-Color alpha = Color((Uint8)0,(Uint8)100,(Uint8)100);//Í¼Æ¬µÄÍ¨µÀ£¬Îª»ÒÉ«
-const string gameTitle = "Five Nights At Freddy's\t(FNAF)";//ÓÎÏ·±êÌâ
-const int maxfr = 4,backFr = 256,dllFr = 4;//×î¶àµÄÖ÷ÌâÊı£¬×î¶àµÄÑ©»¨Ö¡
-Font f1;//×ÖÌå{f1:ÏñËØ×ÖÌå1;}
-int nfr = 1,nbkfr = 0,ndllFr = 0;//µ±Ç°µÄÖ÷Ìâ£¬µ±Ç°µÄÑ©»¨Ö¡
-string frstr = "sources/fr"/*Í¼Æ¬µ¼ÈëµÄÄ£°å×Ö·û´®*/,theme = "Freddy"/*Ö÷Ìâ*/,templateThem = "author:aaaa0ggMC In Bilibili\ntoggle theme!\nTheme:"/*Ö÷ÌâµÄÄ£°å*/;
+Color alpha = Color((Uint8)0,(Uint8)100,(Uint8)100);//å›¾ç‰‡çš„é€šé“ï¼Œä¸ºç°è‰²
+const string gameTitle = "Five Nights At Freddy's\t(FNAF)";//æ¸¸æˆæ ‡é¢˜
+const int maxfr = 4,backFr = 256,dllFr = 4;//æœ€å¤šçš„ä¸»é¢˜æ•°ï¼Œæœ€å¤šçš„é›ªèŠ±å¸§
+Font f1;//å­—ä½“{f1:åƒç´ å­—ä½“1;}
+int nfr = 1,nbkfr = 0,ndllFr = 0;//å½“å‰çš„ä¸»é¢˜ï¼Œå½“å‰çš„é›ªèŠ±å¸§
+string frstr = "sources/fr"/*å›¾ç‰‡å¯¼å…¥çš„æ¨¡æ¿å­—ç¬¦ä¸²*/,theme = "Freddy"/*ä¸»é¢˜*/,templateThem = "author:aaaa0ggMC In Bilibili\ntoggle theme!\nTheme:"/*ä¸»é¢˜çš„æ¨¡æ¿*/;
 const int tsize = 2;
 Texture icon;
-char buf;//¶ÁĞ´
+char buf;//è¯»å†™
 int st;//Style
 
 int main()
 {
-    //ShowWindow(GetConsoleWindow(),SW_HIDE);//Òş²Ø´°¿Ú
-    srand(time(0));//³õÊ¼»¯Ëæ»úÊıÖÖ×Ó
-    f1.loadFromFile("sources/font1.TTF");//µ¼Èë×ÖÌå
-    ///region ÉùÃ÷Óë³õÊ¼»¯±äÁ¿///
+    //ShowWindow(GetConsoleWindow(),SW_HIDE);//éšè—çª—å£
+    srand(time(0));//åˆå§‹åŒ–éšæœºæ•°ç§å­
+    f1.loadFromFile("sources/font1.TTF");//å¯¼å…¥å­—ä½“
+    ///region å£°æ˜ä¸åˆå§‹åŒ–å˜é‡///
 
-        ///region ÆäËûĞÅÏ¢///
-        int frame = 0,finishFrame = 0;//ÓÎÏ·Ö¡
+        ///region å…¶ä»–ä¿¡æ¯///
+        int frame = 0,finishFrame = 0;//æ¸¸æˆå¸§
         const int mfinishFrame = 500;
-        bool loadProcess = true/*ÔØÈëÍ¼Æ¬ÊÇ·ñ³É¹¦,true±íÊ¾ÔØÈë³É¹¦£¬false·´Ö®*/,isShine = false;
+        bool loadProcess = true/*è½½å…¥å›¾ç‰‡æ˜¯å¦æˆåŠŸ,trueè¡¨ç¤ºè½½å…¥æˆåŠŸï¼Œfalseåä¹‹*/,isShine = false;
         bool chicaEatTheMouse = false;
         bool light = false;
         bool ShowIll = false,dwill = false;
-        bool openDoor = false;//ÃÅÊÇ·ñ´ò¿ª
+        bool openDoor = false;//é—¨æ˜¯å¦æ‰“å¼€
         bool lostfocus = false;
         bool shake = true;
         bool exitBar = false;
@@ -69,15 +69,15 @@ int main()
         bool drawBonnie = false;
         bool shark = false;
         double energy = 100.000;
-        Clock clock;//ÖÓ±í
+        Clock clock;//é’Ÿè¡¨
         Color shader;
         ifstream reader;
-        MusicPlayer player("sources/head.wav",player.Async | player.Loop);//ÉùÃ÷ÒôÀÖ²¥·ÅÆ÷£¬¼ûwinMusicPlayer.h
+        MusicPlayer player("sources/head.wav",player.Async | player.Loop);//å£°æ˜éŸ³ä¹æ’­æ”¾å™¨ï¼Œè§winMusicPlayer.h
         CPlayer ballon("sources/ballon.wav");//("sources/ballon.wav",player.Sync,true);
         CPlayer bonnieSound;
         ///open cplayer///
         ///end///
-        string errMsg = "can't load "/*ÔØÈëÊ§°ÜµÄ´íÎóĞÅÏ¢*/,allTheme = templateThem + theme/*Ö÷ÌâĞÅÏ¢*/;
+        string errMsg = "can't load "/*è½½å…¥å¤±è´¥çš„é”™è¯¯ä¿¡æ¯*/,allTheme = templateThem + theme/*ä¸»é¢˜ä¿¡æ¯*/;
         vector<Sprite> snows;
         IntRect egg,egg2,egg3;
         int windowDLL = 10;
@@ -85,9 +85,9 @@ int main()
         VertexArray floorSp2(sf::Lines,2);
         VertexArray door(sf::Quads,4);
         VertexArray doorLine(sf::LinesStrip,4);
-        ///end-region ÆäËûĞÅÏ¢///
+        ///end-region å…¶ä»–ä¿¡æ¯///
 
-        ///region ¸÷ÖÖdelay
+        ///region å„ç§delay
         const Time mouseClickDelay = sf::milliseconds(500);
         Time shineOnLightDelay = sf::milliseconds(3200),
              shineOffLightDelay = sf::milliseconds(200),
@@ -96,16 +96,16 @@ int main()
              spendTimeC = sf::seconds(6*60),
              keyDelayC = sf::seconds(8),
              bonnieTimeC = sf::seconds(16);
-        Time clickDelay;///Êó±êµ¥»÷Ê±µÄÑÓ³Ù
-        Time shineDelay;///ÉÁË¸µÄµÆ¹âµÄÑÓ³Ù
-        Time snowDelay;///Ñ©»¨µÄÆµÂÊ
+        Time clickDelay;///é¼ æ ‡å•å‡»æ—¶çš„å»¶è¿Ÿ
+        Time shineDelay;///é—ªçƒçš„ç¯å…‰çš„å»¶è¿Ÿ
+        Time snowDelay;///é›ªèŠ±çš„é¢‘ç‡
         Time showTime;///egg
         Time nSpendTime,odspTime;
         Time keyDelay;
         Time bonnieTime;
-        ///end-region ¸÷ÖÖdelay
+        ///end-region å„ç§delay
 
-        ///region ÉùÃ÷ÎÄ×Ö///
+        ///region å£°æ˜æ–‡å­—///
         Text toggleTheme(allTheme,f1,16);
         Text startBtn("   NEW GAME",f1,32);
         Text exitBtn("   EXIT",f1,32);
@@ -115,18 +115,18 @@ int main()
         Text strTime("played:",f1,16);
         Text strEn("energy:",f1,16);
         Text finishText("05AM",f1);
-        ///end-region ÉùÃ÷ÎÄ×Ö///
+        ///end-region å£°æ˜æ–‡å­—///
 
-        ///region ÉùÃ÷ÌùÍ¼///
-        Texture head;//¿ªÍ·µÄ¶«Î÷
-        Texture snow;//Ñ©»¨£¬ÓÃÀ´ÔÚÑ©»¨ÆÁ£¬ÏñËØ´óĞ¡£º3*3
-        Texture bk;//ÉÁÆÁµÄÏß
-        Texture bed;//´²
-        Texture eggIll;//µõÆ¿£¬¼¸ÂÊ£ºÇ§·ÖÖ®Ò»£¬¿ªÍ·¾ö¶¨£¬Ëæ»úÊ±¼äÏÔÊ¾£¨1/10000£©
-        Texture bonnie;//°îÄá
-        ///end-region ÉùÃ÷ÌùÍ¼///
+        ///region å£°æ˜è´´å›¾///
+        Texture head;//å¼€å¤´çš„ä¸œè¥¿
+        Texture snow;//é›ªèŠ±ï¼Œç”¨æ¥åœ¨é›ªèŠ±å±ï¼Œåƒç´ å¤§å°ï¼š3*3
+        Texture bk;//é—ªå±çš„çº¿
+        Texture bed;//åºŠ
+        Texture eggIll;//åŠç“¶ï¼Œå‡ ç‡ï¼šåƒåˆ†ä¹‹ä¸€ï¼Œå¼€å¤´å†³å®šï¼Œéšæœºæ—¶é—´æ˜¾ç¤ºï¼ˆ1/10000ï¼‰
+        Texture bonnie;//é‚¦å°¼
+        ///end-region å£°æ˜è´´å›¾///
 
-        ///region ¼ÓÔØÌùÍ¼///
+        ///region åŠ è½½è´´å›¾///
         if(!head.loadFromFile("sources/fr1.png")){
             loadProcess = false;
             errMsg += "sources/fr1.png;";
@@ -155,12 +155,12 @@ int main()
             loadProcess = false;
             errMsg += "sources/bonnie.png;";
         }
-        ///end-region ¼ÓÔØÌùÍ¼///
+        ///end-region åŠ è½½è´´å›¾///
 
-        ///region ¼ì²éÊÇ·ñload³É¹¦///
+        ///region æ£€æŸ¥æ˜¯å¦loadæˆåŠŸ///
         if(!loadProcess){
             MessageBox(NULL,(LPCSTR)errMsg.c_str(),(LPCSTR)gameTitle.c_str(),MB_OK | MB_TOPMOST | MB_ICONERROR);
-            ShowWindow(GetConsoleWindow(),SW_SHOW);//ÔÚIDEÄÚ
+            ShowWindow(GetConsoleWindow(),SW_SHOW);//åœ¨IDEå†…
             ballon.Stop();
             ballon.Close();
             player.Stop();
@@ -169,9 +169,9 @@ int main()
             Sleep(100);
             return EXIT_FAILURE;
         }
-        ///end-region ¼ì²éÍê±Ï///
+        ///end-region æ£€æŸ¥å®Œæ¯•///
 
-        ///region ÉùÃ÷Sprite///
+        ///region å£°æ˜Sprite///
         Sprite sphead(head);
         Sprite spsnow(snow);
         Sprite spBlkSnow(snow);
@@ -179,9 +179,9 @@ int main()
         Sprite spbed(bed);
         Sprite spill(eggIll);
         Sprite spBonnie(bonnie);
-        ///end-region ÉùÃ÷½áÊø///
+        ///end-region å£°æ˜ç»“æŸ///
 
-        ///regionÉèÖÃSprite///
+        ///regionè®¾ç½®Sprite///
         sphead.setPosition(0,0);
         sphead.setColor(alpha);
         spBlkSnow.setColor(sf::Color((Uint8)0,(Uint8)0,(Uint8)0));
@@ -193,9 +193,9 @@ int main()
         spbed.setPosition(320,0);
         spill.setPosition(320,35);
         spBonnie.setPosition(17,110);
-        ///endregion Í£Ö¹ÉèÖÃ///
+        ///endregion åœæ­¢è®¾ç½®///
 
-        ///region ÎÄ×ÖµÄÉèÖÃ///
+        ///region æ–‡å­—çš„è®¾ç½®///
         toggleTheme.setPosition(2,2);
         startBtn.setPosition(100,200);
         exitBtn.setPosition(100,264);
@@ -207,11 +207,11 @@ int main()
         strTime.setPosition(0,0);
         strEn.setPosition(10,395);
         finishText.setPosition((640 - 30*finishText.getString().toAnsiString().length())/2,100);
-        ///end-region ÎÄ×ÖµÄÉèÖÃ
+        ///end-region æ–‡å­—çš„è®¾ç½®
 
-    ///end-region ÉùÃ÷Óë³õÊ¼»¯±äÁ¿///
+    ///end-region å£°æ˜ä¸åˆå§‹åŒ–å˜é‡///
 
-    ///³õÊ¼»¯²Êµ°///
+    ///åˆå§‹åŒ–å½©è›‹///
     egg.left = 410;
     egg.top = 45;
     egg.height = 90;
@@ -224,9 +224,9 @@ int main()
     egg3.top = 180;
     egg3.width = 50;
     egg3.height = 40;
-    ///½áÊø///
+    ///ç»“æŸ///
 
-    ///³õÊ¼»¯floor///
+    ///åˆå§‹åŒ–floor///
     for(int i = 0;i < (int)floorSp.getVertexCount();i++){
         floorSp[i].color = sf::Color::Black;
     }
@@ -246,9 +246,9 @@ int main()
     doorLine[2].position = Vector2f(17,110);
     doorLine[3].position = Vector2f(17,370);
     for(int i = 0;i < (int)doorLine.getVertexCount();i++)doorLine[i].color = Color::Black;
-    ///½áÊø///
+    ///ç»“æŸ///
 
-    ///ÎÄ¼şÅäÖÃ///
+    ///æ–‡ä»¶é…ç½®///
     OP:
     reader.open("gamedata.gmd",ios::in);
     if(!reader.is_open()){
@@ -264,7 +264,7 @@ int main()
     CeData data;
 
     if(!data.load("gamedata.gmd")){
-        cout << "½âÎöÂë´íÎó£¡£¡£¡" << endl;
+        cout << "è§£æç é”™è¯¯ï¼ï¼ï¼" << endl;
         ShowWindow(GetConsoleWindow(),SW_SHOW);
         Sleep(1000);
         return EXIT_FAILURE;
@@ -274,7 +274,7 @@ int main()
             if(uppercase(i.m_value).compare("TRUE") == 0)shake = true;
             else if(uppercase(i.m_value).compare("FALSE") == 0)shake = false;
             else{
-                cout << "²»Ö§³ÖµÄÖµ" << i.m_name <<"£º" << i.m_value << endl;
+                cout << "ä¸æ”¯æŒçš„å€¼" << i.m_name <<"ï¼š" << i.m_value << endl;
                 ShowWindow(GetConsoleWindow(),SW_SHOW);
                 Sleep(1000);
                 return EXIT_FAILURE;
@@ -283,7 +283,7 @@ int main()
             if(uppercase(i.m_value).compare("TRUE") == 0)st = Style::Titlebar | Style::Close;
             else if(uppercase(i.m_value).compare("FALSE") == 0)st = Style::None;
             else{
-                cout << "²»Ö§³ÖµÄÖµ" << i.m_name <<"£º" << i.m_value << endl;
+                cout << "ä¸æ”¯æŒçš„å€¼" << i.m_name <<"ï¼š" << i.m_value << endl;
                 ShowWindow(GetConsoleWindow(),SW_SHOW);
                 Sleep(1000);
                 return EXIT_FAILURE;
@@ -298,7 +298,7 @@ int main()
 
     reader.read(&buf,1);
     if(buf == 'n')shake = false;*/
-    ///½áÊø///
+    ///ç»“æŸ///
 
     player.Play();
 
@@ -378,7 +378,7 @@ int main()
             //cout << Mouse::getPosition(app).x << " " << Mouse::getPosition(app).y << endl;
             if(nfr == 3){
                 if(egg.contains(pos.x,pos.y)){
-                    MessageBox(NULL,(LPCSTR)"ÄãÕÒµ½ÁË¸ö²Êµ°£¡£¡£¡",(LPCSTR)gameTitle.c_str(),MB_OK | MB_TOPMOST);
+                    MessageBox(NULL,(LPCSTR)"ä½ æ‰¾åˆ°äº†ä¸ªå½©è›‹ï¼ï¼ï¼",(LPCSTR)gameTitle.c_str(),MB_OK | MB_TOPMOST);
                     isShine = true;
                     alpha = Color((Uint8)200,(Uint8)200,(Uint8)200);
                     sphead = Sprite(head);
@@ -425,7 +425,7 @@ int main()
                         theme = "Sister Location";
                         break;
                     case 3:
-                        theme = "FANF World";
+                        theme = "FNAF World";
                         break;
                     case 4:
                         theme = "Freddy's big \"Family\"";
@@ -442,10 +442,10 @@ int main()
                     app.close();
                     goto EXTMEM;
                 }else if(continBtn.getGlobalBounds().contains(pos.x,pos.y)){
-                    MessageBox(NULL,(LPCSTR)"¶Ô²»Æğ£¡ÏÖÔÚ½öÖ§³ÖĞÂµÄÓÎÏ·£¬²»Ö§³Ö¶Áµµ£¡£¡£¡",(LPCSTR)gameTitle.c_str(),MB_OK | MB_TOPMOST | MB_ICONERROR);
+                    MessageBox(NULL,(LPCSTR)"å¯¹ä¸èµ·ï¼ç°åœ¨ä»…æ”¯æŒæ–°çš„æ¸¸æˆï¼Œä¸æ”¯æŒè¯»æ¡£ï¼ï¼ï¼",(LPCSTR)gameTitle.c_str(),MB_OK | MB_TOPMOST | MB_ICONERROR);
                 }else if(helpBtn.getGlobalBounds().contains(pos.x,pos.y)){
                     window.displayWindow();
-                    //MessageBox(NULL,(LPCSTR)"¶Ô²»Æğ£¡ÏÖÔÚ½öÖ§³Ö°ïÖú£¬²»Ö§³Ö¶Áµµ£¡£¡£¡",(LPCSTR)gameTitle.c_str(),MB_OK | MB_TOPMOST | MB_ICONERROR);
+                    //MessageBox(NULL,(LPCSTR)"å¯¹ä¸èµ·ï¼ç°åœ¨ä»…æ”¯æŒå¸®åŠ©ï¼Œä¸æ”¯æŒè¯»æ¡£ï¼ï¼ï¼",(LPCSTR)gameTitle.c_str(),MB_OK | MB_TOPMOST | MB_ICONERROR);
                 }
                 break;
             case 1:
@@ -719,10 +719,10 @@ void HelpWindow::m_crt(){
     window.setPosition(Vector2i(to->getPosition().x + 10,to->getPosition().y + 10));
     window.setIcon(icon.getSize().x,icon.getSize().y,icon.copyToImage().getPixelsPtr());
     window.setVisible(true);
-    string help = "1.Press \"F\" to toggle the light.\n"//\t°´ÏÂFÀ´ÇĞ»»¹âÔ´\n"
-                  "2.Click a yellow text \"door\" to toggle the door.\n"//"\tµã»÷Ò»¸ö»ÆÉ«µÄ×Ö\"door\"À´ÇĞ»»ÃÅµÄ¿ª¹Ø\n"
+    string help = "1.Press \"F\" to toggle the light.\n"//\tæŒ‰ä¸‹Fæ¥åˆ‡æ¢å…‰æº\n"
+                  "2.Click a yellow text \"door\" to toggle the door.\n"//"\tç‚¹å‡»ä¸€ä¸ªé»„è‰²çš„å­—\"door\"æ¥åˆ‡æ¢é—¨çš„å¼€å…³\n"
                   "3.there was 4 eggs in the game.(three eggs are on start page,\n    the other egg is very hard to get,1/10000000)\n"
-                  "4.Press \"ESC\" to pause the game!";//"\tÓĞËÄ¸ö²Êµ°£¨Èı¸öÔÚÆô¶¯Ò³£¬ÁíÍâÒ»¸öÊ®·ÖÄÑ»ñµÃ£¬¼¸ÂÊ:1/10000000£©\n";
+                  "4.Press \"ESC\" to pause the game!";//"\tæœ‰å››ä¸ªå½©è›‹ï¼ˆä¸‰ä¸ªåœ¨å¯åŠ¨é¡µï¼Œå¦å¤–ä¸€ä¸ªååˆ†éš¾è·å¾—ï¼Œå‡ ç‡:1/10000000ï¼‰\n";
     sf::Text sayings(help,f1,16);
 
     sf::Text exitBtn("exit",f1,16);
@@ -796,7 +796,7 @@ bool CeData::load(LPCSTR fileName){
     int fc = 0;
     vector<string> temp;
     if((file = fopen(fileName,"r")) == NULL){
-        printf("¼ÓÔØÒ»¸ö½Ğ%sµÄÎÄ¼şÊ§°Ü!!!\n",fileName);
+        printf("åŠ è½½ä¸€ä¸ªå«%sçš„æ–‡ä»¶å¤±è´¥!!!\n",fileName);
         return false;
     }
     while((ch = getc(file)) != EOF){
@@ -804,7 +804,7 @@ bool CeData::load(LPCSTR fileName){
         if(ch == ';')fc++;
     }
     if(fclose(file) != 0){
-        printf("¹Ø±ÕÒ»¸ö½Ğ%sµÄÎÄ¼şÊ§°Ü!!!\n",fileName);
+        printf("å…³é—­ä¸€ä¸ªå«%sçš„æ–‡ä»¶å¤±è´¥!!!\n",fileName);
         return false;
     }
     if(fc == 0)return false;
@@ -820,7 +820,7 @@ bool CeData::load(LPCSTR fileName){
         split(temp,i,':');
         if(!addItem(CeObject(temp[0],temp[1]))){
             cout << "--------------------------" << endl;
-            cout << "±äÁ¿ÖØÃû´íÎó!!!!" << endl;
+            cout << "å˜é‡é‡åé”™è¯¯!!!!" << endl;
             cout << i << endl;
             cout << "--------------------------" << endl;
         }
