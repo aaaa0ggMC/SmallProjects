@@ -1,4 +1,4 @@
-# C! (Windows Only)\
+# C! (Windows Only)
 2020年的小项目，历经多年风霜，最新版的源码我已经找不到了，所以这里的源码比main.zip中的exe文件要老一点
 
 components中的MWB.exe程序似乎对电脑有坏处，具体为出现一堆弹窗，然后NtRaiseHardError
