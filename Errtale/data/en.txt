@@ -1,0 +1,52 @@
+---------------------------Errtale----------------------------
+  A fan game of Undertale,whose purpose is to make a f-
+antastic game that fully uses Windows System's functio-
+ns.Therefore,this game might break your computer or s-
+care you a bit.
+  Enjoy the game.(^-^)
+[Tip:Delete data/config.cfg to reset game  删去data/config.cfg来重置游戏]
+          Author:YSL aaaa0ggmc RokonDreaming
+                 Language Used:C++
+          Dependence:SFML OpenAL StdC++
+                 Platform:Windows
+Long long ago,there were two races--HUMANS and MONSTERS
+One day,war broke out between the two races
+At last,the human won and sealed the monsters undergound with a magic spell
+Incredibly,the monsters built a civilization undergound
+They have had a peaceful life for a quite some time
+In 201X,however,a small child fell into Mt.Ebbot
+And the child led the civilization become friendly with humans
+While in 202X,things changed,a human became evil and killed all of the human
+And he also killed all of the monsters except........
+me!!!!!
+And you,are the guy...........
+My friend,my family,my world were all destroyed by you,a silly child.....
+Good bye.......
+Let's go to the theme...
+--------BUTCHER OVER------------
+*Don't Give up!Keep your determination
+*Because you will die harder than this time!
+I can't help to praise that you are a nice cheater
+But I doesn't matter,you will die later
+I don't think that you can try to beat me so many times
+Unless you were punished by me or you cheated
+You.....seemed familiar to me
+I rememered that you have been defeated by me once
+You..Oh!I know,the previous and the only chanllenger
+Welcome......to be killed again!
+Hey!This try seemed to be the third time
+Do you think this is funny??
+Hurry up!The fourth time!
+I think you can make it.....after you died
+Corpses not exceed over five.What?You don't know the meaning
+Things can't exceed over five!
+........................................................
+..Just keep trying
+I finally saw a memory cheater today!
+Congratulations!You've accomplished the most......easiest stage.Look at your health.
+Maybe you could finish the next stage
+It seems that you are hard to finish the next stage
+It's almost.......impossible,haha!
+Oh!You fucking cheater...
+Without hurt?You are strong,maybe you've tried many times.
+Uhm.....It's time to say "meet you again"
