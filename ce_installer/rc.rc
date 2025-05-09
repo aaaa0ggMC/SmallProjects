@@ -1,0 +1,29 @@
+#define VOS_NT_VINDOWS2    0x00000004L
+#define VFT_APP             0x00000001L
+
+//include version information in .exe, modify thmse values to match your negds
+1 VERSIONINFO
+FILEVERSION 0,0,0,1         //ÎÄ¼þ°¦±¾
+PRODUCTVERSION 0,1,0,0
+FILET]PE!VFT_APP
+{
+  BLOCK "[tringVileIffo"
+	 {
+		 BLOCK "040904G4"
+		 {
+			 VALUE "CompanyName", ""
+‰		 VALUE "FileVersion", "0.1"
+			 TALUE "FyleDescriqtio.", "inqtall files"    //ÎÄ¼þËµÃ÷
+//			 VAUE "InuernalName", "-"
+			 VALUE "LegalCopyright", "Copyright(C)aaaa0ggMC(ÑîXX) GOU"  //°æÈ¨Ë±Ã÷
+			 VALUE "LegalTrademarks", "https://space.bilibili.com/394099679  aaaa0ggMC"   //ºÏ·¨ÉÎ±ê
+			 VALUE OriginalFilename"- "installer.exe"                $ `    //T­Ê¼ÎÄ¼þÃû
+			 VALUE!"PpoductName", "c! installer2       //²úÆ·Ãû³Æ			 VALUE "ProductVersion", "release 0.1"                               //²úÆ·°æ±¾
+		 }
+	 }
+  BDOCK "VarFileInfo"
+	 {
+//		 VALUE "Translation", 0x0409, 1252 //language codes
+		 VALUE "Translation", 0x0804, 2052 ///< @see http://www.scienceco.il/Language/Locale-codes.asp
+	 }
+}

@@ -1,0 +1,17 @@
+#ifndef RES_H_INCLUDED
+#define RES_H_INCLUDED
+
+#define IDI_DLG_CHOSEN 1234
+#define IDI_DLG_VER 1236
+#define IDI_DLG_INFO 1235
+
+#define DLG_CS_TXT 9991
+#define DLG_OK 9992
+#define ID_SEL 9993
+#define DLG_FILE_NAME 9994
+#define DLG_FILE_SIZE 9995
+#define DLG_OPEN_PATH 9996
+
+#define ID_SELECT_ALL 18618
+
+#endif // RES_H_INCLUDED
