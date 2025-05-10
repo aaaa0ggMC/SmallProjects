@@ -11,6 +11,8 @@ for folder in */; do
     # 检查该文件夹是否包含README.md文件
     if [ ! -f "$folder_name/README.md" ]; then
         todo_folders+=("$folder_name")
+    elif [ -f "$folder_name/DOC_TODO" ];then
+	todo_folders+=("$folder_name")
     fi
 done
 
