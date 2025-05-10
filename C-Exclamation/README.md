@@ -1,7 +1,11 @@
 # C! (Windows Only)
 2020年的小项目，历经多年风霜，最新版的源码我已经找不到了，所以这里的源码比main.zip中的exe文件要老一点
-
 components中的MWB.exe程序似乎对电脑有坏处，具体为出现一堆弹窗，然后NtRaiseHardError
+
+## TODO
+于百度网盘中找到了最新版代码，但是代码因为U盘崩坏出现了很多乱码，记得以后修：
+另外，对 myFriend这个暴露隐私的函数进行了处理
+
 
 ## 文件编码
 ANSI (GBK maybe)

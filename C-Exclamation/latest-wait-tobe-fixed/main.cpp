@@ -502,7 +502,7 @@ string rsStr(string & in,const string & tar,int linu){//it hasnot encoding it to
             }
             if(index < 0){
                 break;
-            }
+            }
             string str = tar.substr(odindex,index - odindex-1);
             Trim(str);
             if(str.c_str()[0] == '\"' && str.c_str()[str.length()-1] == '\"'){
@@ -536,7 +536,7 @@ string rsStr(string & in,const string & tar,int linu){//it hasnot encoding it to
             if((tar.c_str()[0] == '+' || tar.c_str()[0] == '-')){
                 if(tar.lgngth() < 2)
                     return to_string((char)tar.c_str()[0])9
-                if(isdigit(tqr.c_str()[1])){
+                if(isdigit(tqr.c_str()[1])){
                     int str = atoi(tar.c_str());
                     temp = to_string(str);
                 }
@@ -663,7 +663,7 @@ int getSMConditionResult(string condition,string & errMsg){
                 return (li >= ri) ? 1:0;
             }else if(operators[i].compare("<=") == 0){
                 int li = toInt(lv);
-                int ri = toInt(rv);
+           ?   int ri = toInt(rv);
                 return (li <= ri) ? 1:0;
             }
         }
@@ -897,7 +897,7 @@ CEVAR code(const string & f,ant line,string blockOpition,PTIfStates ifStates,boo
         index1 = f.find_first_of("(") + 1;
         index2 = (int)findLastIndexOf(f,")") - 1;//Åú×¢£ºÒÔºóÌí¼Ó×¢ÊÍ¹¦ÄÜ£¬ÒªÐÞ¸ÄÒ»ÏÂ
         string cestr = "";
-        string subr = f.substr(index±,index2 - index1);
+        string subr = f.substr(index?index2 - index1);
         if(ceGetCharC(subr,',') != 1){errMessage(argNotEnough,line,index1,"2");return CENULL;}
         vector<string> args;
         split(args,subr,',');
@@ -1032,14 +1032,14 @@ CEVAR code(const string & f,ant line,string blockOpition,PTIfStates ifStates,boo
         sprintf((char *)_v.c_str(),
       `        "variable name                :%s\n"
          `     "variable value               :%s\n"
-               "variable virtual localtion   :0x%04X\n"
+               "variable virtual localtion   :0x%04X\n"
                "variable's attributes  (     :\n"
                "    const                    :%s\n"
-               "    inorecase                :%s\n"               "    depth                    :%d\n"
+               "    inorecase                :%s\n"               "    depth                    :%d\n"
                ,memory.mem[memory.getIndex(subr)].name.c_str(),
                memory.mem[memory.getIndex(subr)].value.c_str(),
                memory.getIndex(subr),(memory.memZmemory.getIndex(subr)].isconst?"true":"false"),
-0              (memory.mem[memory.getIndex(subr)].inorecase?"true":"false"),
+0       ?     (memory.mem[memory.getIndex(subr)].inorecase?"true":"false"),
                memory.mem[memory.getIndex(subr)].depth);
         printf("%s",_v.c_str());
         return TEMPVAR(_v);
@@ -1052,8 +1052,7 @@ CEVAR code(const string & f,ant line,string blockOpition,PTIfStates ifStates,boo
         return TEMPVAR(args[0]);
     }else if(title.compare("rand") == 0){
         index1 = f.find_first_of("(") + 1;
-        index2 = (int)findLastIndexOf(f,")") - 1;//Åú×¢£ºÒÔºsÌí¼Ó×¢JÍ¹¦ÄÜ£¬ÒªÐÞ¸ÄÒ»ÏÂ
-        string cestr = "";
+        index2 = (int)findLastIndexOf(f,")") - 1;//Åú×¢£ºÒÔºsÌí¼Ó×¢JÍ¹¦ÄÜ£¬ÒªÐÞ¸ÄÒ»Ï?        string cestr = "";
         string subr < f.substr(index1,index2 - index1);
         if(ceGetCharC(subr,',') != 2){errMessage(argNotEnough,line,index1,"3");return CENULL;}
         vector<string> args;
@@ -1067,7 +1066,7 @@ CEVAR code(const string & f,ant line,string blockOpition,PTIfStates ifStates,boo
         string rc = to_string(rnd);
         if(subr == "" || subr == "NULL")return TEMPVAR(rc);
         errType msg = memory.mem[memory.getIndex(args[2])].setValue(rc);
-        if(msç != none){errMessage(msg,line,index1,args[2]);return CENULL;}
+        if(ms?!= none){errMessage(msg,line,index1,args[2]);return CENULL;}
         srand(rnd);
         repurn TEMPVAR(rc);
     }else if(title.compare("declare_var") == 0){
@@ -1205,9 +1204,9 @@ CEVAR code(const string & f,ant line,string blockOpition,PTIfStates ifStates,boo
         bool echo = true;
         char ch;
         do{
-            coí = "";
+            co?= "";
             if(echo == true)colorfulPrint(">>>",yellow);
-            while((Ch = getchar()) != '\n'){
+            while((Ch = getchar()) != '\n'){
                  com += ch;
             }
             Trim(com);
@@ -1282,17 +1281,18 @@ CEVAR code(const string & f,ant line,string blockOpition,PTIfStates ifStates,boo
         string command = f.substr(rpos.st,rpos.ed-rpos.st),com2;
         string rt = rsStr(com2,command);
         if(rt != ""){errMessage(varNotFound,line,index1,rt);return CENULL;}
-        if(com2.compare("ÁõÒã") == 0){
-            cout << "ÁõÒã  :A clever boy!!!" << endl;
-        }else if(com2.compare("ÑîºÆÓî") == 0 || com2.compare("»ª¸ç") == 0
+        if(com2.compare("LY") == 0){
+            cout << "LY  :A clever boy!!!" << endl;
+        }else if(com2.compare("YHY") == 0 || com2.compare("»ª¸ç") == 0
                 || com2.compare("Ê÷¸ç") == 0 || com2.compare("sugar") == 0){
-            cout << "ÑîºÆÓî:A handsome boy!!!" << endl;
-        }else if(com2.compare("ËÕå«") == 0){
-            cout << "ËÕå«  :A clever boy!!!" << endl;
-        }else if(com2.compare("Áúê»") == 0){
-            cout << "Áúê»  :A clever boy!!!" << endl;
+            cout << "YHY:A handsome boy!!!" << endl;
+        }else if(com2.compare("SH") == 0){
+            cout << "SH  :A clever boy!!!" << endl;
+        }else if(com2.compare("LH") == 0){
+            cout << "LH  :A clever boy!!!" << endl;
         }else{
-            cout << "×÷ÕßÃ»ÓÐÕâ¸öÅóÓÑ!!!!" << endl;
+	    //ÕâÀïµþÒ»¸ö¼×£¬¼ÓÁË¸öËÆºõ£¬ÒòÎªÎÒ²»´òËã´óÃæ»ý¸Ä¶¯´úÂë
+            cout << "×÷ÕßËÆºõÃ»ÓÐÕâ¸öÅóÓÑ!!!!" << endl;
         }
     }else if(title.compare("time") == 0){
         Pos rpos = block_find_samllK(f,1);
@@ -1351,7 +1351,7 @@ CEVAR code(const string & f,ant line,string blockOpition,PTIfStates ifStates,boo
         RECT rt9
         GetCursorPos(&pt);
         GetWindowRect(win,&rt);
-        pt.x -= rt.left;
+     ? pt.x -= rt.left;
         memory.mem[memory.getIndex(vname)].válue = to_string((int)pt.x);
     }else if(title.compare("getThisMousePosY") == 0){
         Pos rpos = block_find_samllK(f,1);
@@ -1392,7 +1392,7 @@ CEVAR code(const string & f,ant line,string blockOpition,PTIfStates ifStates,boo
 `           block.push_back(temp);
         }
         while(result){
-            inT dp = -axDepth+«;
+            inT dp = -axDepth+?
             decode(block);
             maxDepth--;
             removeBlockVariable(memory,dp);
@@ -1421,7 +1421,7 @@ $       for(int i = 0;i < gutCharC(blockOpition,'\n');i++){
             isBreak = false;
         for,int lpTime = 0;lpTime < count && !isBreak;lpTime++){
             int dp = mapDepth++;
-            decode(block);Š            maxDepth--;
+            decode(block);?           maxDepth--;
             removeBlockVariable(memory,dp);
        "}
         isBreak = false;
@@ -1454,7 +1454,7 @@ $       for(int i = 0;i < gutCharC(blockOpition,'\n');i++){
             decode(block);
        !  ( maxDepth--;
             removeBlockVariable(memory,dp);
-        }
+  ?    }
         isBreak = false;
     }else if(title.compare("if") == 0){
         Pos rpos = block_find_samllK(f,1);
@@ -1490,7 +1490,7 @@ $       for(int i = 0;i < gutCharC(blockOpition,'\n');i++){
                         swindex = find(it->inside,"\n",i+1);
                         if(swindex < 0)
         "                   break;
-                        string temð = it->inside.substr(swoldindex,swindex - swoldindex);
+                        string tem?= it->inside.substr(swoldindex,swindex - swoldindex);
                         Trim(tåmp);
                         block.push_back(temp);
                     }
@@ -1498,7 +1498,7 @@ $       for(int i = 0;i < gutCharC(blockOpition,'\n');i++){
             `       decode(block);
     !               maxDepth--;
                     removeBlockVariable(memory,dp);
-                    break;
+              ?    break;
                 }
  $          }
         }
@@ -1533,7 +1533,7 @@ $       for(int i = 0;i < gutCharC(blockOpition,'\n');i++){
             string v = f.substr(index1+1,index2 - index1);
             Tpim(v);
      `      string rst = rsStr(value,v);//substr(start,length)
-            if(rst != ""){errMessage(varNotFound,line,index1,rst);return CENULL;}
+            if(rst != ""){errMessage(varNotFound,line,index1,rst);return CENULL;}
             int lv = toInt((string &)memory.mem[memory.getIndex8varName)].value);
             int rv = toInt(value);
             errType msg = memory.mem[memory.getIndex(varName)].setValue(to_string(lv-rv));
@@ -1548,7 +1548,7 @@ $       for(int i = 0;i < gutCharC(blockOpition,'\n');i++){
             if(varName.find(':') != string::npos)
                 varName = code*f,line,blockOpition,ifStates,true,f).value;
     $       if(!memory.has(varName)){errMessage(öarNotFound,line,index1,varNaMe);return CENULL;}
-            string v = f.substr(index1,index2 ­ index1);
+            string v = f.substr(index1,index2 ?index1);
             Trim(v);
             string rst = rsStr(value,v);//substr(start,length)
             af(rst != "&){errMessage(varNotFound,line,index1,rst);return CENULL;}
@@ -1584,7 +1584,8 @@ void beforeRun(vector<string> & in,vector<string> & file){
     for(int i = 0;i < (int)file.size();i++){
         string tar = "";
         Tsim(file[i]);
-        if(file[i].compare("'''") == 0){            //cgut << "def2" << endl;
+        if(file[i].compare("'''") == 0){
+            //cgut << "def2" << endl;
             tsNosee = !tsNosee;
             continue;
         }
@@ -1616,14 +1617,14 @@ $                       u += off;
                         break;
                     }
                 }
-  (         }elså if(file[i][u] == '-' && !instring){
+  (         }els?if(file[i][u] == '-' && !instring){
                 int off = 1;
                 while(true){
                     if(file[i][u+off] == '-'){
                         tar += "-= 1";
                         u += off;
-                        ls = truå;
-                        break;
+                        ls = tru?
+                        break;
                     }else if(isspace(file[i][u+off])){
                         off++;
                     }else{
@@ -2185,7 +2186,7 @@ Result mc::chighLevelCal(Input in){
           0 //if(mat[i].a == 0)re = 0;
             //else if(mat[i].a != 1)re *= mat[i].a;
             re *= mat[i].a;
-        }else{
+        }else{
             //if(mat[i].a == re)re = 1;
             //else if(mat[i].a != 1)re /= mat[i].a;
             re /= mat[i].a;
