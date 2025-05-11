@@ -13,6 +13,7 @@
 #define IDC_NV                          1012
 #define IDC_VOLUME                      1013
 #define IDC_VSH                         1014
+#define IDC_LOAD                        1015
 
 // Next default values for new objects
 // 

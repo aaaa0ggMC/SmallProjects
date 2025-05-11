@@ -19,11 +19,6 @@ HWND console = NULL;
 int main(int argc, char* argv[]) {
 	console = GetConsoleWindow();
 	ShowWindow(console, SW_SHOW);
-	if (argc > 1) {
-		help();
-		return 0;
-	}
-	HWND hFFplay = NULL;
 	string userProfileEnv = "";
 	if (!getEnv(USER_PROFILE,userProfileEnv)) {
 		system("mkdir %" USER_PROFILE "%\\AppData\\StudyAll\\DesktopBack\\");
@@ -36,13 +31,20 @@ int main(int argc, char* argv[]) {
 		help();
 		return -1;
 	}
+	if (argc > 1) {
+		help();
+		return 0;
+	}
+	HWND hFFplay = NULL;
 	STARTUPINFO si;
    	 PROCESS_INFORMATION pi; ZeroMemory( &si, sizeof(si) );
     si.cb = sizeof(si);
     ZeroMemory( &pi, sizeof(pi) );
     string aa = ( string("\"") + runPath  + string("\" \"") + path + string("\" -fs -window_title \"close me to close the video\" -noborder -x 1920 -y 1080 -loop 0 ") + option);
     cout << aa << endl;
-	CreateProcessA(NULL,(LPSTR)(aa.c_str()),NULL,NULL,FALSE,0,NULL,NULL,&si,&pi);
+    si.dwFlags = STARTF_USESHOWWINDOW;
+    si.wShowWindow = SW_SHOW; 
+	CreateProcessA(NULL,(LPSTR)(aa.c_str()),NULL,NULL,FALSE,CREATE_NEW_CONSOLE,NULL,NULL,&si,&pi);
 	Sleep(2000);
 	HWND hProgram = FindWindowW(L"Progman", NULL);
 	SendMessageTimeout(hProgram, SPLIT_OUT, 0, 0, 0, 100, 0);
@@ -124,25 +126,31 @@ LRESULT HelpDlgProc(HWND hDlg, UINT Msg, WPARAM wParam, LPARAM lParam) {
 	int sliderPos = 0;
 	switch (Msg)
 	{
-	case WM_INITDIALOG: {
-		//Small Bug Could not Init
-		wstring wdatac = str2wstr(path);
-		SetDlgItemTextW(helpDlg, ID_VDPTH, (LPCWSTR)wdatac.data());
-		wdatac = str2wstr(runPath);
-		SetDlgItemTextW(helpDlg, ID_PLPTH, (LPCWSTR)wdatac.data());
-		int id = forDetection.mute == true ? BST_CHECKED : BST_UNCHECKED;
-		Button_SetCheck(GetDlgItem(helpDlg, IDC_MUTE), id);
-		id = forDetection.noVideo == true ? BST_CHECKED : BST_UNCHECKED;
-		Button_SetCheck(GetDlgItem(helpDlg, IDC_NV), id);
-		id = forDetection.noSaying == true ? BST_CHECKED : BST_UNCHECKED;
-		Button_SetCheck(GetDlgItem(helpDlg, IDC_NS), id);
-		id = forDetection.volume;
-		SendDlgItemMessage(helpDlg, IDC_VOLUME, TBM_SETPOS, TRUE, id);
-		return TRUE;
-	}case WM_COMMAND: {
+	case WM_COMMAND: {
+		static bool inited = false;
 		int btId;// btEv;
 		string upath = "";
 		btId = LOWORD(wParam);//Button Id
+		if(!inited){
+			inited = true;
+			//Small Bug Could not Init
+			std::cout << "Load!" << std::endl;
+			wstring wdatac = str2wstr(path);
+			SetDlgItemTextW(helpDlg, ID_VDPTH, (LPCWSTR)wdatac.data());
+			wdatac = str2wstr(runPath);
+			SetDlgItemTextW(helpDlg, ID_PLPTH, (LPCWSTR)wdatac.data());
+			int id = forDetection.mute == true ? BST_CHECKED : BST_UNCHECKED;
+			Button_SetCheck(GetDlgItem(helpDlg, IDC_MUTE), id);
+			id = forDetection.noVideo == true ? BST_CHECKED : BST_UNCHECKED;
+			Button_SetCheck(GetDlgItem(helpDlg, IDC_NV), id);
+			id = forDetection.noSaying == true ? BST_CHECKED : BST_UNCHECKED;
+			Button_SetCheck(GetDlgItem(helpDlg, IDC_NS), id);
+			id = forDetection.volume;
+			wdatac = str2wstr(std::to_string(id));
+			SendDlgItemMessage(helpDlg, IDC_VOLUME, TBM_SETPOS, TRUE, id);
+			SetDlgItemTextW(helpDlg, IDC_VSH, (LPCWSTR)wdatac.data());
+			return TRUE;	
+		}
 		//btEv = HIWORD(wParam); Event
 		if (btId == IDC_CHOOSE_VD) {
 			if (!OpenFileS(upath, "Videos(*.mp4)\0*.mp4\0All files(maybe unable to play)(*.*)\0*.*\0")) {
@@ -207,6 +215,7 @@ void help() {
 		MSG msg;
 		helpDlg = CreateDialog(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_HELP_DIALOG), NULL, HelpDlgProc);
 		ShowWindow(helpDlg, SW_SHOW);
+		SendMessageA(helpDlg,WM_COMMAND,MAKEWORD(0,IDC_LOAD),0);
 		while (GetMessage(&msg, NULL, 0, 0))
 		{
 			TranslateMessage(&msg);
@@ -264,6 +273,11 @@ int ReadBackData(string filePath, string& fileData, string& runPath, string& opt
 			}
 		}
 		reader.close();
+	std::cout << "[FP]" << fileData
+		<< "[RP]" << runPath
+		<< "[OP]" << option
+		<< std::endl;
+
 		return ret;
 	}
 	else {
