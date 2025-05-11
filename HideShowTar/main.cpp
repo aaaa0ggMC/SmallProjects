@@ -2,6 +2,7 @@
 #include <windows.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <conio.h>
 
 HWND h = NULL;
 BOOL CALLBACK pro(DWORD d);
@@ -58,12 +59,9 @@ int main()
     {
         sh = !sh;
         ShowWindow(h, (sh ? SW_SHOW : SW_HIDE));
-        printf((sh ? "Show\n" : "Hide\n"));
-        if(GetKeyState('Q') & 0x8000)
-        {
-            break;
-        }
-        system("pause");
+        printf("%sPress anything to toggle(Q to quit).\n",(sh ? "Show\n" : "Hide\n"));
+        char ch = _getch();
+	if(ch == 'Q' || ch == 'q')break;
     }
     
     ShowWindow(h, SW_SHOW);
