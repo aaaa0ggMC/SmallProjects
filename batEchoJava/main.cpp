@@ -7,23 +7,29 @@
 
 using namespace std;
 
-int main()
-{
+int main(int argc,char * argv[]){
     ifstream fin;
     ofstream fout;
     string dstr = "";
     string file = "";
 
-    fin.open("GameGen.java");
+    //2025/5/12 添加 	 
+    if(argc < 3){
+    	std::cerr << "Error:command: bej [openfile] [outputfile]" << std::endl;
+      	system("pause");
+	return -1;	
+    }
+
+    fin.open(argv[1]);
     if(!fin.good()){
-        cout << "Error:No java file (root.java) here!" << endl;
+        cerr << "Error:Can't load" << argv[1] << "!" << endl;
         system("pause");
         return -1;
     }
 
-    fout.open("out.txt");
+    fout.open(argv[2]);
     if(!fout.good()){
-        cout << "Error:Can't open out.txt to write.Restart application may fix this." << endl;
+        cout << "Error:Can't open " << argv[2] << " to write.Restart application may fix this." << endl;
         system("pause");
         return -1;
     }
@@ -48,7 +54,7 @@ int main()
             dstr = "";
         }
     }
-    dstr = "echo." + dstr + " >> %GenFile%\n";
+    dstr = "echo " + dstr + " >> %GenFile%\n";
     fout << dstr;
 
     fout.close();
