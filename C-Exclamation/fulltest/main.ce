@@ -1,0 +1,48 @@
+/** @author aaaa0ggmc
+* @date 2025/5/12
+* @description Test all the features of ce(Although I've forgotten most of them).
+* @language English(to avoid encoding problems)
+*/
+//0.variables
+/* or: var float Number String,actually they are identical to each other.*/ 
+BaseObj a = "";
+
+if(0){//true & false are not defined...
+//1.Hello World!
+println("Hello World!");
+
+//2.console io
+//2.1 print
+print("'Ni hao' in chinese is " + "'Hello' in English.\n");
+
+//2.2 delayed prints
+print$d(50,"Hello!I'm talking!!!!");
+Sleep(500);
+print$d(200,"SERIOUSLY\n");
+
+//2.3 colorful prints (sysVar needed)
+print$c(CL_RED,"I'm red!\n");//BUG: cannot resolve escapings
+println();
+print$c(CL_YELLOW,"I'm yellow!");
+println();
+
+//2.4 input
+print("Input something here:"); 
+a = input(); //you can also use input(a); like Python
+////string concats
+print$c(CL_GREEN,"You have just written [" + a + "]\n");
+
+//2.5 CE$input invisibly input --- have BUGS
+print("Input something here again(now you can press CTRL+ENTER to begin a new line):");
+CE$input(a); //CE$input allows you to press CTRL+ENTER to begin a new line
+print("You've just written [" + a + "]\n");
+}
+
+//3. util functions
+//3.1 system
+system("echo Hello From System Command!");
+//3.2 runProgram
+runProgram("echo Hello From RunProgram.");
+
+
+
