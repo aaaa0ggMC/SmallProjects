@@ -36,13 +36,83 @@ print$c(CL_GREEN,"You have just written [" + a + "]\n");
 print("Input something here again(now you can press CTRL+ENTER to begin a new line):");
 CE$input(a); //CE$input allows you to press CTRL+ENTER to begin a new line
 print("You've just written [" + a + "]\n");
-}
 
 //3. util functions
-//3.1 system
+//3.1 system (also runProgram )
 system("echo Hello From System Command!");
-//3.2 runProgram
-runProgram("echo Hello From RunProgram.");
 
+//3.2 Sleep
+print("I'm here to sleep.");
+loop(4){
+	Sleep(200); //sleep for 100ms
+	print("Z");
+	Sleep(200);
+	print("z");
+}
+println("\nI'm wide awake now.");
 
+//3.3 SetConsolePosition or CE$setPos
+system("clear");
+CE$setPos(0,0);
+Sleep(500);
+print("I've got a secret to tell uuuu");
+CE$setPos(10,3);
+Sleep(400);
+print$d(200,"That is ...........");
+CE$setPos(5,5);
+print$c(CL_RED,"You are a nerd.");
+Sleep(1000);
+clear();//Alternative of system("clear");
 
+//3.4 getMousePos relatively to the screen
+loop(8){
+	var x;
+	var y;
+	getMousePosX(x);
+	getMousePosY(y);
+	println("Mouse Absolute Pos:(" + x + "," + y + ")");
+	Sleep(300);
+} 
+
+//3.5 getMousePos relatively to current window
+loop(8){
+	var x;
+	var y;
+	getThisMousePosX(x);
+	getThisMousePosY(y);
+	println("Mouse Relative Pos:(" + x + "," + y + ")");
+	Sleep(300);
+} 
+
+//3.6 getKeyInt & getKeyChar
+var keycode;
+print("Press a key:");
+getKeyInt(keycode);
+println("\nYou've entered a key whose int value is" + keycode);
+print("Press again:");
+getKeyChar(keycode);
+println("\nYou've pressed [" + keycode + "]");
+free("keycode"); //dealloc the variable used above
+}
+
+//3.7 time
+var t;
+time(t);
+print("Current time is " + t);
+free("t");
+
+//3.8 isAdmin or isRunAsAdmin
+var status = isAdmin();
+if(status){
+	println("The program runs as admin.");
+}else(){ //else blocks
+	println("The program doesn't run as admin.");
+}
+
+//3.9 random number
+println("Here are a range of random numbers ranging from 0-100:");
+loop(500){
+	var rnd;
+	rand(0,100,rnd);
+	print(rnd + " ");
+}
