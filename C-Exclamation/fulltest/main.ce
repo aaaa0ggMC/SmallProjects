@@ -2,6 +2,7 @@
 * @date 2025/5/12
 * @description Test all the features of ce(Although I've forgotten most of them).
 * @language English(to avoid encoding problems)
+* @note to run the program,you are supposed to run ce_installer first!
 */
 //0.variables
 /* or: var float Number String,actually they are identical to each other.*/ 
@@ -93,7 +94,6 @@ print("Press again:");
 getKeyChar(keycode);
 println("\nYou've pressed [" + keycode + "]");
 free("keycode"); //dealloc the variable used above
-}
 
 //3.7 time
 var t;
@@ -111,8 +111,42 @@ if(status){
 
 //3.9 random number
 println("Here are a range of random numbers ranging from 0-100:");
-loop(500){
+loop(50){
 	var rnd;
 	rand(0,100,rnd);
 	print(rnd + " ");
 }
+}
+
+//3.10 DLL Functions
+var dll = "d1";
+LoadDLL(dll,"clink.dll"); //load dll
+println("DLL loaded");
+var value = "[none]";
+value = CalInstDLL(dll,"GetWinVersion");
+// UnloadDLL(dll);//Unload
+println("DLL Reported:" + value);
+free("dll");
+free("value");
+
+//3.11 seek : display current variables
+print$c(CL_BLUE,"Variables now:\n");
+seek();
+
+//3.11 declare_var
+var vname = "1_newvar";
+//declare_var(variable_name(ignores rule),value,Reserved)
+declare_var(1_newvar,"","Reserved");
+seek();
+free(vname);
+free("vname");
+
+//3.12 local: display variable attributes
+CESTDAPI OUTABLE var info = "xx"; //CESTDAPI & OUTABLE is needed
+local(info);
+if(1){
+	//sub-vars
+	CESTDAPI OUTABLE var ffo = "yy";
+	local(ffo);
+}
+free("info");
