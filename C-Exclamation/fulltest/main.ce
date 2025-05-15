@@ -4,11 +4,40 @@
 * @language English(to avoid encoding problems)
 * @note to run the program,you are supposed to run ce_installer first!
 */
+//-1.attributes
+//describe the author
+//Note that all pragmas can be changed runtime,not like C/C++
+#pragma author "aaaa0ggmc"
+//disable NoteStarts & NoteEnds promblems 
+#pragma waring 1
+//force check CESTDAPI for some operations
+#pragma CheckApi true
+//outputs Global Print Color
+#pragma outputColor CL_BIGWHITE
+//global input color
+#pragma inputColor CL_BIGWHITE
+
+NotesStart
+	This is comment!
+	just like /*   */
+NotesEnd
+
 //0.variables
 /* or: var float Number String,actually they are identical to each other.*/ 
 BaseObj a = "";
 
-if(0){//true & false are not defined...
+//0.1 comparisons
+var v_1 = 0,v_2 = 1;
+//comparison values are either 0 or 1
+println("0 > 1? " + v_1 > v_2);
+println("0 < 1? " + v_1 < v_2);
+println("1 >= 1? " + 1 >= 1);
+println("1 == 1? " + 1 == 1);
+//println("2 != 1? " + 2 != 1); != operators are not supported well!!
+//println("2 != 2? " + v_1 != v_1);
+println("1 <= 2? " + 1 <= 2);
+
+//if(0){//true & false are not defined...
 //1.Hello World!
 println("Hello World!");
 
@@ -116,7 +145,6 @@ loop(50){
 	rand(0,100,rnd);
 	print(rnd + " ");
 }
-}
 
 //3.10 DLL Functions
 var dll = "d1";
@@ -150,3 +178,62 @@ if(1){
 	local(ffo);
 }
 free("info");
+
+//3.13 math calcs only +-*/() is supported
+var calc_result = math("2*(9+1)/2");
+println("2*(9+1)/2 = " + calc_result);
+//use $ to link variables
+a = 10;
+calc_result = math("$a/3+1");
+print("Given a = " + a);
+print( ",a/3+1 = " + calc_result);//BUG here
+println();
+free("calc_result");
+
+//4.Grammars
+//4.1 conditions
+print("Tell me a number:");
+var iv = input();
+if(iv > 100){
+	println("The number is greater than 100!");
+}else if(iv == 0){
+	println("The number is 0.");
+}else(){
+	println("The number is smaller than 100 or equals to 100 or maybe it's not a number.");
+}
+//4.2 loops
+//4.2.1 limited loops
+var i = 0;
+loop(10){
+	i += 1; //if the value can be told that it is an integer,the operation operates increase
+	println("Hello World *" + i + "!");
+}
+free("i");
+//4.2.2 infinite loops
+rloop(){
+	break;
+	println("I shall be not printed forever.");
+}
+//4.2.3 while
+while(0){
+	println("I shall never be executed.");
+	continue;
+}
+//4.2.4 const values
+const int v = 0;
+// v = 1; cannot do this
+free("v");
+
+//4.2.5 extern values:which actually means global variable
+if(1){
+	extern int ext_1 = "a";
+	int ext_2 = "b";
+}
+println("ext_1 still usable:" + ext_1);//ext_2 is destroyed
+
+//4.2.6 IGNORECASES
+CESTDAPI IGNORECASE int hello = "1";
+Hello = 2;
+HELLO += 2;
+HeLlO = hello + 2;
+print("hellos:" + heLLO);

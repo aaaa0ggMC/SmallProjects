@@ -1,0 +1,62 @@
+/** @author aaaa0ggmc  
+* @description Magic Crystal Ball
+* @language English
+*/
+#pragma author "aaaa0ggmc"
+#pragma outputColor CL_PURPLE
+#pragma inputColor CL_WHITE
+
+// 1. 初始化水晶球
+CESTDAPI OUTABLE var crystalBall = "Unactivated";
+declare_var(1_question, "", "Reserved");
+
+// 2. 彩色标题
+print$c(CL_YELLOW2, "MAGIC CRYSTAL BALL");
+println();
+print$d(100, "==================");
+println();
+println();
+
+// 4. 输入问题
+print$c(CL_GREEN, "Ask your question (press CTRL+ENTER to submit):");
+println();
+CE$input(1_question);
+
+// 5. 激活水晶球
+print$d(50, "The crystal ball is glowing...");
+println();
+crystalBall = "Activated";
+local(crystalBall);
+
+// 6. 随机占卜结果
+var fateNum;
+rand(1, 5, fateNum);
+
+if(fateNum == 1){
+    print$c(CL_RED, "OUTLOOK NOT GOOD");
+}else if(fateNum == 2){
+    print$c(CL_YELLOW, "SIGNS POINT TO YES");
+}else if(fateNum == 3){
+    print$c(CL_GREEN, "DEFINITELY YES");
+}else if(fateNum == 4){
+    print$c(CL_BLUE, "ASK AGAIN LATER");
+}else if(fateNum == 5){
+    print$c(CL_PINK, "VERY DOUBTFUL");
+}
+println();
+
+// 7. 动画效果
+loop(5){
+    print$c(CL_RED, "* ");
+    Sleep(200);
+    print$c(CL_YELLOW, "* ");
+    Sleep(200);
+    print$c(CL_GREEN, "* ");
+    Sleep(200);
+    CE$setPos(5, 10);
+}
+
+// 9. 清理
+free("crystalBall");
+free("1_question");
+free("fateNum");

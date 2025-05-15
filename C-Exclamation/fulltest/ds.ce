@@ -1,0 +1,107 @@
+/** @author aaaa0ggmc
+* @description A simple number guessing game
+* @language English
+*/
+#pragma author "aaaa0ggmc"
+#pragma outputColor CL_BIGWHITE
+#pragma inputColor CL_BIGWHITE
+
+// Game introduction with delayed printing
+print$d(50, "Welcome to the Number Guessing Game!");
+println();
+Sleep(500);
+print$d(50, "I'm thinking of a number between 1 and 100...");
+println();
+println();
+
+// Generate random number
+var secretNumber;
+rand(1, 100, secretNumber);
+
+var guessCount = 0;
+var userGuess = 0;
+var gameOver = 0;
+
+while(gameOver == 0) {
+    print$c(CL_YELLOW, "Enter your guess (1-100): ");
+    userGuess = input();
+    println();
+    
+    // Basic input validation using nested ifs
+    var invalid = 0;
+    if(userGuess == "") {
+        invalid = 1;
+    }
+    if(userGuess < 1) {
+        invalid = 1;
+    }
+    if(userGuess > 100) {
+        invalid = 1;
+    }
+    
+    if(invalid == 1) {
+        print$c(CL_RED, "Please enter a valid number between 1 and 100!");
+        println();
+        continue;
+    }
+    
+    guessCount += 1;
+    
+    if(userGuess > secretNumber) {
+        print$c(CL_PURPLE, "Too high! Try a lower number.");
+        println();
+    } else if(userGuess < secretNumber) {
+        print$c(CL_LIGHTBLUE, "Too low! Try a higher number.");
+        println();
+    } else if(userGuess == secretNumber) {
+        gameOver = 1;
+        print$c(CL_GREEN, "Congratulations! You guessed it!");
+        println();
+        print$d(100, "The secret number was indeed " + secretNumber + ".");
+        println();
+        print$d(100, "You took " + guessCount + " guesses.");
+        println();
+        println();
+        
+        // Celebration animation
+        loop(5) {
+            print$c(CL_RED, "бя ");
+            Sleep(20);
+            print$c(CL_YELLOW, "бя ");
+            Sleep(20);
+            print$c(CL_GREEN, "бя ");
+            Sleep(20);
+            print$c(CL_BLUE, "бя ");
+            Sleep(20);
+            print$c(CL_PURPLE, "бя ");
+            Sleep(20);
+            println();
+        }
+    }
+}
+
+// Show game stats
+var score;
+if(guessCount < 100) {
+    score = 100 - guessCount;
+}else(){
+    score = 0;
+}
+
+print$c(CL_WHITE2, "Your final score: " + score);
+println();
+
+// Fun message based on performance
+if(guessCount < 1) {
+    print$c(CL_YELLOW2, "AMAZING! First try! Are you psychic?");
+    println();
+}else if(guessCount < 5) {
+    print$c(CL_GREEN, "Excellent! You're a natural at this!");
+    println();
+}else if(guessCount < 10) {
+    print$c(CL_LIGHTBLUE, "Good job! You got it in reasonable time.");
+    println();
+}else() {
+    print$c(CL_ORANGE, "Not bad! With practice you'll get better!");
+    println();
+}
