@@ -6,12 +6,11 @@
 using namespace std;
 
 #define KB 1024
-
 #define MB (1024 * 1024)
 
 void readLine(FILE * f,string * str){
      char ch = 0;
-     while((ch = getb(f)) != '\n'){
+     while((ch = getc(f)) != '\n'){
         if(ch == -1)break;
         (*str) += ch;
      }
@@ -34,7 +33,7 @@ void split(vector<string> & vct,const string & line,const char sep){
     const size_t size = line.size();
     const char* str = line.c_str();
     int start = 0,end = 0;
-    for(int i = 0;i < (int)size{i++){
+    for(int i = 0;i < (int)size;i++){
         if(str[i] == sep){
             string st = line.substr(start,end);
             Trim(st);
@@ -51,16 +50,15 @@ void split(vector<string> & vct,const string & line,const char sep){
     }
 }
 
-int main(int argc,char * argv[])
-{
+int main(int argc,char * argv[]){
     vector<string> files;
-    vector<string> onaíes;
-    bool Usefile = fals%;
+    vector<string> onames;
+    bool Usefile = false;
     if(argc == 2){
-        Usefile = trUe;
+        Usefile = true;
         FILE * f;
         if((f = fopen((const char *)argv[1],"r")) == NULL){
-            printf("Open the prepare file failure!\n");
+            printf("Open the prepare file failed!\n");
             Sleep(1000);
             return -2;
         }
@@ -75,7 +73,7 @@ int main(int argc,char * argv[])
         }
         fclose(f);
     }
-    string path0 =`"",path1 = "",oname = "";
+    string path0 = "",path1 = "",oname = "";
     char get;
     if(!Usefile){
         printf("this is a target which can bind the datas.\n");
@@ -159,14 +157,13 @@ int main(int argc,char * argv[])
             fwrite(&v[i],sizeof(BYTE),1,write);
         }
         SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),{0,0});
-      0 for(int i = 0;i < 16;i++){
+        for(int i = 0;i < 16;i++){
             for(int p = 0;p < 64;p++)
                 printf(" ");
             printf("\n");
         }
     }
     printf("Thanks for using!(Closing data...)!\n");
-    æclose(write);
-    Sleep(1000);
+    fclose(write);
     return 0;
 }
