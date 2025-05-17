@@ -11,6 +11,7 @@
 - fish
 ### C++(ucrt64)
 - sfml 2.6.1+
+- ncursesw (部分项目)
 - gcc c++20/23(ucrt)
 ### Editor
 - vim9.1
@@ -18,5 +19,4 @@
 ## 目标
 - 尽一切可能使用现代C++特性
 - Work,then work faster. 保证代码能工作，尽量保证效率
-
 

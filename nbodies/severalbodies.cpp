@@ -25,7 +25,7 @@ constexpr float G = 6.67e-4 * zoom_ratio;
 constexpr float coll_e = 1.0f;
 //最小距离
 constexpr float min_dist = 0.1;
-//QAQ sfml似乎对编译器运算支持不怎么好，这里使用constexpr会报错，算了，多个全局变量也不是不行
+//QAQ sfml似乎对编译期运算支持不怎么好，这里使用constexpr会报错，算了，多个全局变量也不是不行
 //小小破个戒
 sf::Vector2f movVec = 0.008f * sf::Vector2f(static_cast<float>(width),static_cast<float>(height));
 
