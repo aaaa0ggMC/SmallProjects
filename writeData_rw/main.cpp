@@ -61,7 +61,8 @@ enum class Choice{
 	Menu,
 	Write,
 	Open,
-	Exit
+	Exit,
+	About
 };
 
 void clear_win(WINDOW*win,char ch,int from_x,int from_y,int to_x,int to_y){
@@ -74,15 +75,55 @@ void clear_win(WINDOW*win,char ch,int from_x,int from_y,int to_x,int to_y){
 	}	
 }
 
+
+Choice page_about(){
+	clear();
+	attron(COLOR_PAIR(col_now));
+	wmvprintw_center(nullptr,0,"About");
+	attroff(COLOR_PAIR(col_now));
+
+	getch();
+	return Choice::Menu;
+}
+
 Choice page_open(){
 	return Choice::Menu;
+}
+
+void winput(WINDOW*win,int lines,int cols,int maxlength,std::string& data,int attr,char endc = '\n'){
+	if(!win)win = stdscr;
+	wattron(win,attr);
+	wmove(win,lines,cols);
+	int ch = '\0';
+	int count = 0;
+	int pos = cols;
+	while((ch = getch()) != endc){
+		wmove(win,lines,pos);
+		touchwin(stdscr);
+		switch(ch){
+		case KEY_LEFT:
+			pos--;
+			continue;
+		case KEY_RIGHT:
+			pos++;
+			continue;
+		default:
+			//data.insert(count - pos,static_cast<char>(ch));
+			++count;
+			break;
+		}
+		if(count <= maxlength){
+			waddch(win,ch);
+		}
+		++pos;
+	}
+	wattroff(win,attr);
 }
 
 Choice page_write(){
 	//Init
 	wclear(mainW);
 	wclear(infoW);
-	framework(infoW,"{}--{}",infoTitle,"Use arrow keys <up><down> to scroll.--Press Q to return to menu");
 	framework(mainW,"{}--{}",mainTitle,"Use arrow keys <left><right> to scroll procedures.");
 	touchwin(stdscr);
 
@@ -141,9 +182,20 @@ Choice page_write(){
 			running = false;
 			continue;
 		}
-		getch();
 		switch(progress){
-			
+		case 0:{
+			int chcount = 0;
+			std::string input = "";
+			framework(infoW,"{}--{}",infoTitle,"Use Fn to select folder F1:prev F2:next F3:confrim F4:parent");
+			wmove(mainW,LINES/4,1);
+			wprintw(mainW,"Enter the filename to store the data:");
+			winput(mainW,LINES/4+1,1,COLS-2,input,COLOR_PAIR(col_now));	
+       		}
+			break;
+		case 1:
+			break;
+		case 2:
+			break;
 		}
 		++progress;
 	}
@@ -161,7 +213,7 @@ Choice page_menu(){
 
 	wmove(mainW,1,1);
 	{
-		int i = 4;
+		int i = 5;
 		wmvprintw_center(mainW,1,"Welcome to WriteDataRework!");
 		//LOGO
 		wmvprintw_center(mainW,2," ___       ___   ______      _____   ________    _____   ______       ____     ________     ____   "); 
@@ -174,6 +226,7 @@ Choice page_menu(){
                                                                                                     	
 		wmvprintw_center(mainW,mainLen-i--,"(1)Write New File");
 		wmvprintw_center(mainW,mainLen-i--,"(2)Open File     ");
+		wmvprintw_center(mainW,mainLen-i--,"(3)About         ");
 		wmvprintw_center(mainW,mainLen-i--,"(Q)Quit          ");
 	}
 	wmove(infoW,0,0);
@@ -190,6 +243,9 @@ Choice page_menu(){
 			break;
 		case '2':
 			choice = Choice::Open;
+			break;
+		case '3':
+			choice = Choice::About;
 			break;
 		case 'q':
 		case 'Q':
@@ -253,6 +309,9 @@ int main(void){
 			break;
 		case Choice::Write:
 			choice = page_write();
+			break;
+		case Choice::About:
+			choice = page_about();
 			break;
 		}
 	}  
