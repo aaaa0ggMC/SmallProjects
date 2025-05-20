@@ -12,6 +12,7 @@
 #include <cstdarg>
 #include <thread>
 #include <chrono>
+#include <algorithm>
 
 int utf8_char_count(const std::string& str) {
     std::u8string_view view(reinterpret_cast<const char8_t*>(str.data()), str.size());
@@ -72,17 +73,10 @@ void clear_win(WINDOW*win,char ch,int from_x,int from_y,int to_x,int to_y){
 			wmove(win,j,i);
 			waddch(win,ch);
 		}
-	}	
+	}
 }
 
-
 Choice page_about(){
-	clear();
-	attron(COLOR_PAIR(col_now));
-	wmvprintw_center(nullptr,0,"About");
-	attroff(COLOR_PAIR(col_now));
-
-	getch();
 	return Choice::Menu;
 }
 
@@ -90,35 +84,25 @@ Choice page_open(){
 	return Choice::Menu;
 }
 
-void winput(WINDOW*win,int lines,int cols,int maxlength,std::string& data,int attr,char endc = '\n'){
-	if(!win)win = stdscr;
-	wattron(win,attr);
-	wmove(win,lines,cols);
-	int ch = '\0';
-	int count = 0;
-	int pos = cols;
+void winput(WINDOW* win, int lines, int cols, int szl,int szcol ,int maxlength, std::string& data, int attr, char endc = '\n') {
+   	if(!win)win = stdscr;
+	WINDOW* ipt = subwin(win,szl,szcol,lines,cols);
+
+	wclear(ipt);
+	touchwin(win);
+	touchwin(stdscr);
+	wattron(ipt,attr);
+	curs_set(1);
+	char ch = '\0';
 	while((ch = getch()) != endc){
-		wmove(win,lines,pos);
+		waddch(ipt,ch);
+		touchwin(win);
 		touchwin(stdscr);
-		switch(ch){
-		case KEY_LEFT:
-			pos--;
-			continue;
-		case KEY_RIGHT:
-			pos++;
-			continue;
-		default:
-			//data.insert(count - pos,static_cast<char>(ch));
-			++count;
-			break;
-		}
-		if(count <= maxlength){
-			waddch(win,ch);
-		}
-		++pos;
 	}
-	wattroff(win,attr);
+	wattroff(ipt,attr);
+	curs_set(0);
 }
+
 
 Choice page_write(){
 	//Init
@@ -189,7 +173,7 @@ Choice page_write(){
 			framework(infoW,"{}--{}",infoTitle,"Use Fn to select folder F1:prev F2:next F3:confrim F4:parent");
 			wmove(mainW,LINES/4,1);
 			wprintw(mainW,"Enter the filename to store the data:");
-			winput(mainW,LINES/4+1,1,COLS-2,input,COLOR_PAIR(col_now));	
+			winput(mainW,LINES/4+1,1,4,COLS-2,COLS-2,input,COLOR_PAIR(col_now));	
        		}
 			break;
 		case 1:
