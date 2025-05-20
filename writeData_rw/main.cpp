@@ -173,7 +173,7 @@ Choice page_write(){
 			framework(infoW,"{}--{}",infoTitle,"Use Fn to select folder F1:prev F2:next F3:confrim F4:parent");
 			wmove(mainW,LINES/4,1);
 			wprintw(mainW,"Enter the filename to store the data:");
-			winput(mainW,LINES/4+1,1,4,COLS-2,COLS-2,input,COLOR_PAIR(col_now));	
+			winput(mainW,LINES/4+1,1,1,COLS-2,COLS-2,input,COLOR_PAIR(col_now));	
        		}
 			break;
 		case 1:
