@@ -211,7 +211,9 @@ int main(int argc,char * arg[]){
 				ball.setPosition(lt.position.x + width/2,lt.position.y + height/2);
 			}else{
 				ball.setPosition(vs[index].position);
-				if(calcing)index++;
+				if(calcing){
+					index++;
+				}
 				if(index >= vs.getVertexCount())index = 0;
 			}
 			window.draw(ball);
